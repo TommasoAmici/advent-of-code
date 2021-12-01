@@ -16,8 +16,7 @@ type Depth = Int
 readDepths :: IO [Depth]
 readDepths = do
   input <- readFile "input.txt"
-  let allLines = lines input
-  let depths = map read allLines :: [Depth]
+  let depths = read <$> lines input :: [Depth]
   return depths
 
 sumBools :: [Bool] -> Int
