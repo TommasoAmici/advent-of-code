@@ -1,6 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-import Data.Bits (xor)
 import Data.List (foldl')
 import qualified Data.Text as T
 import qualified Data.Text.IO as TIO
