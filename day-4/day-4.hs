@@ -10,7 +10,7 @@ type Extracted = Int
 
 type ExtractionRound = Int
 
-type Cell = (Int, ExtractionRound)
+type Cell = (Extracted, ExtractionRound)
 
 type Board = [[Cell]]
 
