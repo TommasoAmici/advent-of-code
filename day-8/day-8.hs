@@ -62,11 +62,15 @@ findSubsetOfDifference size digits a b = head $ filter (Set.isSubsetOf subset) f
     filtered = filterBySetSize size digits
     subset = Set.difference a b
 
+-- Thinking visually: knowing 7 and 4, if we exclude 8 we can get 9 from the digits
+-- of which the union of 7 and 4 are a subset
 findNine :: [Set.Set Segment] -> Set.Set Segment -> Set.Set Segment -> Set.Set Segment -> Set.Set Segment
 findNine digits eight seven four = head $ filter (\x -> Set.isSubsetOf nine_ x && x /= eight) digits
   where
     nine_ = Set.union seven four
 
+-- Thinking visually: knowing 1, we can get 6 from the digits made of six segments as it's the only
+-- one of which 1 is not a subset.
 findSix :: [Set.Set Segment] -> Set.Set Segment -> Set.Set Segment
 findSix digits one = head six
   where
