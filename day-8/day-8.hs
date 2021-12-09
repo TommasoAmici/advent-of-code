@@ -43,7 +43,7 @@ countEasyDigits signals = do
   return converted
 
 part1 :: (Foldable t, Monad t) => t Display -> Int
-part1 displays = foldl' (+) 0 $ countEasyDigits output
+part1 displays = sum $ countEasyDigits output
   where
     output = concatMap snd displays
 
@@ -105,7 +105,7 @@ convertDisplay displays = do
   return (positionalNotation output)
 
 part2 :: (Foldable t, Monad t) => t Display -> ConvertedSignal
-part2 displays = foldl' (+) 0 $ convertDisplay displays
+part2 displays = sum $ convertDisplay displays
 
 main :: IO ()
 main = do
