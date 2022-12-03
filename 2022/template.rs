@@ -1,7 +1,10 @@
 use std::fs::File;
 use std::io::{self, prelude::*, BufReader};
 
-fn todo(reader: BufReader<File>) {
+fn solve(file_path: &str) -> io::Result<()> {
+    let file = File::open(file_path)?;
+    let reader = BufReader::new(file);
+
     for _line in reader.lines() {
         let line = match _line {
             Ok(l) => l,
@@ -9,12 +12,7 @@ fn todo(reader: BufReader<File>) {
         };
         println!("{}", line);
     }
-}
 
-fn solve(file_path: &str) -> io::Result<()> {
-    let file = File::open(file_path)?;
-    let reader = BufReader::new(file);
-    todo(reader);
     Ok(())
 }
 
