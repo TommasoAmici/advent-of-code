@@ -1,11 +1,17 @@
+use std::cmp::{max, min};
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::{prelude::*, BufReader};
 
-fn find_sections(assignment: &str) -> HashSet<i32> {
+fn find_limits(assignment: &str) -> (i32, i32) {
     let limits: Vec<&str> = assignment.split("-").collect();
     let start: i32 = limits[0].parse().unwrap();
     let end: i32 = limits[1].parse().unwrap();
+    return (start, end);
+}
+
+fn find_sections(assignment: &str) -> HashSet<i32> {
+    let (start, end) = find_limits(assignment);
     return HashSet::from_iter(start..end + 1);
 }
 
@@ -16,14 +22,29 @@ fn find_sets(line: String) -> (HashSet<i32>, HashSet<i32>) {
     return (fst, snd);
 }
 
-fn full_overlap(line: String) -> bool {
+fn full_overlap_naive(line: String) -> bool {
     let (fst, snd) = find_sets(line);
     return fst.difference(&snd).count() == 0 || snd.difference(&fst).count() == 0;
 }
 
-fn partial_overlap(line: String) -> bool {
+fn full_overlap(line: String) -> bool {
+    let elves: Vec<&str> = line.split(",").collect();
+    let (fst_start, fst_end) = find_limits(elves[0]);
+    let (snd_start, snd_end) = find_limits(elves[1]);
+    return (fst_start <= snd_start && fst_end >= snd_end)
+        || (snd_start <= fst_start && snd_end >= fst_end);
+}
+
+fn partial_overlap_naive(line: String) -> bool {
     let (fst, snd) = find_sets(line);
     return fst.intersection(&snd).count() > 0;
+}
+
+fn partial_overlap(line: String) -> bool {
+    let elves: Vec<&str> = line.split(",").collect();
+    let (fst_start, fst_end) = find_limits(elves[0]);
+    let (snd_start, snd_end) = find_limits(elves[1]);
+    return min(fst_end, snd_end) >= max(fst_start, snd_start);
 }
 
 fn full_overlap_total(lines: Vec<String>) -> i32 {
@@ -74,7 +95,8 @@ fn test_full_overlap() {
         (String::from("6-6,4-6"), true),
         (String::from("4-6,6-6"), true),
     ] {
-        assert_eq!(full_overlap(case), expected);
+        assert_eq!(full_overlap(case.clone()), expected);
+        assert_eq!(full_overlap_naive(case.clone()), expected);
     }
 }
 
@@ -86,7 +108,8 @@ fn test_partial_overlap() {
         (String::from("4-6,6-6"), true),
         (String::from("2-6,4-8"), true),
     ] {
-        assert_eq!(partial_overlap(case), expected);
+        assert_eq!(partial_overlap(case.clone()), expected);
+        assert_eq!(partial_overlap_naive(case.clone()), expected);
     }
 }
 
