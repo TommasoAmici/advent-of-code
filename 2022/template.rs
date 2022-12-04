@@ -1,22 +1,33 @@
+use std::collections::HashSet;
 use std::fs::File;
-use std::io::{self, prelude::*, BufReader};
+use std::io::{prelude::*, BufReader};
 
-fn solve(file_path: &str) -> io::Result<()> {
-    let file = File::open(file_path)?;
-    let reader = BufReader::new(file);
+fn solve_part_1(lines: Vec<String>) -> i32 {
+    // TODO
+}
 
-    for _line in reader.lines() {
-        let line = match _line {
-            Ok(l) => l,
-            Err(error) => panic!("Can't read line: {:?}", error),
-        };
-        println!("{}", line);
-    }
-
-    Ok(())
+fn solve_part_2(lines: Vec<String>) -> i32 {
+    // TODO
 }
 
 fn main() {
     let file_path = "./data/input.txt";
-    solve(file_path).unwrap();
+    let file = File::open(file_path).unwrap();
+    let reader = BufReader::new(file);
+    let lines: Vec<String> = reader.lines().map(|l| l.unwrap()).collect();
+
+    let part_1 = solve_part_1(lines.clone());
+    println!("{}", part_1);
+
+    let part_2 = solve_part_2(lines.clone());
+    println!("{}", part_2);
+}
+
+#[test]
+fn test_solve() {
+    let case = vec![
+        String::from("XXX"),
+    ];
+    assert_eq!(solve_part_1(case.clone()), XXX);
+    assert_eq!(solve_part_2(case.clone()), XXX);
 }

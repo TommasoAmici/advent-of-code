@@ -91,7 +91,7 @@ fn test_partial_overlap() {
 }
 
 #[test]
-fn test_full_overlap_total() {
+fn test_solve() {
     let case = vec![
         String::from("2-4,6-8"),
         String::from("2-3,4-5"),
@@ -100,20 +100,6 @@ fn test_full_overlap_total() {
         String::from("6-6,4-6"),
         String::from("2-6,4-8"),
     ];
-    let result = full_overlap_total(case);
-    assert_eq!(result, 2);
-}
-
-#[test]
-fn test_partial_overlap_total() {
-    let case = vec![
-        String::from("2-4,6-8"),
-        String::from("2-3,4-5"),
-        String::from("5-7,7-9"),
-        String::from("2-8,3-7"),
-        String::from("6-6,4-6"),
-        String::from("2-6,4-8"),
-    ];
-    let result = partial_overlap_total(case);
-    assert_eq!(result, 4);
+    assert_eq!(full_overlap_total(case.clone()), 2);
+    assert_eq!(partial_overlap_total(case.clone()), 4);
 }
