@@ -1,4 +1,5 @@
 .env
+**/data/input.txt
 
 # Created by https://www.toptal.com/developers/gitignore/api/rust,macos,
 # Edit at https://www.toptal.com/developers/gitignore?templates=rust,macos,
