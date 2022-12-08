@@ -1,12 +1,18 @@
 use std::fs;
 use std::time::Instant;
 
-fn solve_part_1(input: &str) -> i32 {
+type XXX = i32;
+
+fn parse(input: &str) -> XXX {
+    // TODO
+}
+
+fn solve_part_1(puzzle: &XXX) -> i32 {
     // TODO
     return 0;
 }
 
-fn solve_part_2(input: &str) -> i32 {
+fn solve_part_2(puzzle: &XXX) -> i32 {
     // TODO
     return 0;
 }
@@ -15,12 +21,16 @@ fn main() {
     let file_path = "./data/input.txt";
     let contents = fs::read_to_string(file_path).expect("Failed to open file");
 
+    let parse_start = Instant::now();
+    let puzzle = parse(&contents);
+    println!("parsing: {}µs", parse_start.elapsed().as_micros());
+
     let part_1_start = Instant::now();
-    let part_1 = solve_part_1(&contents);
+    let part_1 = solve_part_1(&puzzle);
     println!("{} {}µs", part_1, part_1_start.elapsed().as_micros());
 
     let part_2_start = Instant::now();
-    let part_2 = solve_part_2(&contents);
+    let part_2 = solve_part_2(&puzzle);
     println!("{} {}µs", part_2, part_2_start.elapsed().as_micros());
 }
 
